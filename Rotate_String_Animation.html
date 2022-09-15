@@ -81,20 +81,36 @@
 
             submitBtn.onclick = function(){
                 userString = inputBox.value
-                displayBox.innerHTML = `<h1>${userString}</h1>`
+                displayBox.innerHTML = update(userString)
             }
+
+            function update(s){
+                let letters = Array.from(s)
+                let resHTML = ""
+                for(let letter of letters){
+                    resHTML += `<div class="letter">${letter}</div>`
+                }
+                return resHTML
+            }
+
+            function addClass(className){
+                let letterBoxes = document.querySelectorAll(".letter")
+                for(let letterBox of letterBoxes){
+                    letterBox.classList.add(className)
+                }
+            }
+
             function rotate(e)
             {
                 let btn = e.target
                 if(btn.innerText.trim()=='>'){
                     userString = rotateRightOnce(userString)
-                    
+                    addClass("moveRight")
                 }
                 else{
                     userString = rotateLeftOnce(userString)
-                    
+                    addClass("moveLeft")
                 }
-                displayBox.innerHTML = `<h1>${userString}</h1>`
             }
 
             function rotateRightOnce(s){
